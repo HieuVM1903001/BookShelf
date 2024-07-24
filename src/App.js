@@ -11,9 +11,10 @@ function App() {
   const onShelfSelect = (value, bookData) => {
     setAllBooks((prevBooks) => {
       const newBookList = prevBooks.map((bookItem) =>
-        bookItem.book.id === bookData.book.id
-          ? { book: bookItem.book, state: value }
+        bookItem.id === bookData.id
+          ? { ...bookItem, shelf: value }
           : bookItem
+
       );
       localStorage.setItem("allBooks", JSON.stringify(newBookList));
       return newBookList;
@@ -27,13 +28,9 @@ function App() {
         setAllBooks(JSON.parse(storedBooks));
       } else {
         const fetchBooks = async () => {
-          const books = await getAll();
-          const initialBooks = books.map((item) => ({
-            book: item,
-            state: "none",
-          }));
-          setAllBooks(initialBooks);
-          localStorage.setItem("allBooks", JSON.stringify(initialBooks));
+          const books = await getAll();         
+          setAllBooks(books);
+          localStorage.setItem("allBooks", JSON.stringify(books));
         };
         fetchBooks();
       }

@@ -1,11 +1,11 @@
-import { Card, Select, Typography } from "antd";
+import { Card, Select, Typography, Tooltip, Image } from "antd";
 import { useState } from "react";
 
 export const BookItem = ({ bookData, onShelfSelect }) => {
-  const [current, setCurrent] = useState(bookData.state);
+  const [current, setCurrent] = useState(bookData.shelf);
 
   const authorsList = () => {
-    return bookData?.book?.authors?.map((author, index) => (
+    return bookData?.authors?.map((author, index) => (
       <div key={index}>{author}</div>
     ));
   };
@@ -41,24 +41,9 @@ export const BookItem = ({ bookData, onShelfSelect }) => {
         borderRadius: 8,
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
-      cover={
-        <div style={{ position: "relative", height: 300, overflow: "hidden" }}>
-          <img
-            alt={bookData?.book?.title}
-            src={bookData?.book?.imageLinks?.smallThumbnail}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: 8,
-              border: "1px solid #ddd",
-            }}
-          />
-        </div>
-      }
       actions={[
         <Select
-          key="category-select"
+          key="shelf-select"
           style={{ width: 150 }}
           options={items}
           onChange={(value) => {
@@ -70,13 +55,36 @@ export const BookItem = ({ bookData, onShelfSelect }) => {
         />,
       ]}
     >
+      <div style={{ position: "relative", height: 200, overflow: "hidden" }}>
+        <Image
+          alt={bookData?.title}
+          src={bookData?.imageLinks?.smallThumbnail}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "4px 4px 4px 4px",
+          }}
+        />
+      </div>
       <Card.Meta
         title={
-          <Typography level={4} style={{ margin: 0 }}>
-            {bookData?.book?.title}
-          </Typography>
+          <Tooltip title={bookData?.title}>
+            <Typography.Text ellipsis style={{ margin: 0, width: "100%" }}>
+              {bookData?.title}
+            </Typography.Text>
+          </Tooltip>
         }
-        description={<div>{authorsList()}</div>}
+        description={
+          <div
+            style={{
+              height: 40,
+              overflow: "hidden",
+            }}
+          >
+            {authorsList()}
+          </div>
+        }
       />
     </Card>
   );

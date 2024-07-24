@@ -19,8 +19,8 @@ export const SearchPage = ({ listBook, onShelfSelect }) => {
     if (input) {
       const match = listBook.filter(
         (bookData) =>
-          bookData?.book?.title.toLowerCase().includes(input.toLowerCase()) ||
-          bookData?.book?.authors.some((author) =>
+          bookData?.title.toLowerCase().includes(input.toLowerCase()) ||
+          bookData?.authors.some((author) =>
             author.toLowerCase().includes(input.toLowerCase())
           )
       );

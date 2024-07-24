@@ -11,7 +11,7 @@ export const BookShelf = ({ category, bookList, onShelfSelect }) => {
         grid={{ gutter: 16, column: 4 }}
         dataSource={bookList}
         renderItem={(item) => (
-          <List.Item key={item?.book?.id}>
+          <List.Item key={item?.id}>
             <BookItem bookData={item} onShelfSelect={onShelfSelect} />
           </List.Item>
         )}

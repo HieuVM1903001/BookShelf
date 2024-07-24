@@ -42,7 +42,7 @@ export const MainPage = ({ allBooks, onShelfSelect }) => {
     <>
       <Layout style={layoutStyle}>
         <Header style={headerStyle}>
-          Main Page{" "}
+          Main Page{"       "}
           <Button
             onClick={onSearchClick}
             type="primary"
@@ -57,7 +57,7 @@ export const MainPage = ({ allBooks, onShelfSelect }) => {
               <BookShelf
                 category="Currently Reading"
                 bookList={allBooks.filter(
-                  (bookData) => bookData.state === "currentlyReading"
+                  (bookData) => bookData.shelf === "currentlyReading"
                 )}
                 onShelfSelect={onShelfSelect}
               />
@@ -66,7 +66,7 @@ export const MainPage = ({ allBooks, onShelfSelect }) => {
               <BookShelf
                 category="Want to Read"
                 bookList={allBooks.filter(
-                  (bookData) => bookData.state === "wantToRead"
+                  (bookData) => bookData.shelf === "wantToRead"
                 )}
                 onShelfSelect={onShelfSelect}
               />
@@ -75,7 +75,7 @@ export const MainPage = ({ allBooks, onShelfSelect }) => {
               <BookShelf
                 category="Read"
                 bookList={allBooks.filter(
-                  (bookData) => bookData.state === "read"
+                  (bookData) => bookData.shelf === "read"
                 )}
                 onShelfSelect={onShelfSelect}
               />
